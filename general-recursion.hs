@@ -1,4 +1,8 @@
-import Data.Function (fix)
+-- import Data.Function (fix)
+
+fix :: (a -> a) -> a
+fix f = let x = f x
+         in x
 
 main = do
     putStrLn "isEven 0"
@@ -54,7 +58,7 @@ main = do
     putStrLn "Fac 4"
     print $ fac 4
 
-ff_isEven :: (Int -> Bool) -> Int -> Bool
+ff_isEven :: (Int -> Bool) -> (Int -> Bool)
 ff_isEven k n = case n of
      0 -> True
      1 -> False
@@ -62,6 +66,14 @@ ff_isEven k n = case n of
 
 isEven :: Int -> Bool
 isEven = fix ff_isEven
+
+-- eval :: HaskellFunction -> a
+-- eval = ...
+
+-- eval (isEven 5)
+-- > False
+
+
 
 ff_equal :: ((Int, Int) -> Bool) -> (Int, Int) -> Bool
 ff_equal k (a, b) = case a of
